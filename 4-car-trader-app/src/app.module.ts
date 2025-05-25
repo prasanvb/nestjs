@@ -1,0 +1,26 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { UsersModule } from './users/users.module';
+import { ReportsModule } from './reports/reports.module';
+
+@Module({
+  imports: [
+    UsersModule,
+    ReportsModule,
+    // Import TypeOrmModule with SQLite configuration
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: 'db.sqlite',
+      // Entities to be loaded for this connection. Accepts both entity classes and directories where from entities need to be loaded.
+      entities: [],
+      // Indicates if database schema should be auto created on every application launch. Be careful with this option and don't use this in production - otherwise you can lose production data. This option is useful during debug and development.
+      synchronize: true,
+      logging: true,
+    }),
+  ],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}
