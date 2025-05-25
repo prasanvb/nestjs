@@ -15,7 +15,7 @@
 
 ## Nestjs Projects
 
-[1-core](1-core/README.md)
-[2-message-book-app](2-message-book-app/README.md)
-[3-dependency-injection-indepth](3-dependency-injection-indepth/README.md)
-[4-car-trader-app](4-car-trader-app/README.md)
+- [1-core](1-core/README.md)
+- [2-message-book-app](2-message-book-app/README.md)
+- [3-dependency-injection-indepth](3-dependency-injection-indepth/README.md)
+- [4-car-trader-app](4-car-trader-app/README.md)
