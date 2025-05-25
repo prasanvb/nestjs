@@ -5,5 +5,6 @@ dist
 # Ignore environment files
 .env
 
-# Ignore log files
+# Ignore files
 *.log
+*.js
