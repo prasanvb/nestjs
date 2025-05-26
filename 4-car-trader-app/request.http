@@ -1,0 +1,12 @@
+// HTTP Request using REST client vscode extension
+// Compose MULTIPLE requests in a single file (separated by ### delimiter)
+
+### Sign up user
+// NOTE: Single line space below content type is mandatory
+POST http://localhost:3000/user/auth/signup
+Content-Type: application/json
+
+{
+  "email": "prasan@gmail.com",
+  "password": "sample1"
+}

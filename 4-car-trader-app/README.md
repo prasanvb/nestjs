@@ -1,5 +1,7 @@
 # NestJS-Car-Trader
 
+- Validation pipe option `whitelist:true` strips in-valid properties from the incoming body object for security
+
 ## RDBMS
 
 - Entity: An entity is a "thing" or "object" in the real world. An entity contains attributes, which describe that entity. So anything about which we store information is called an entity.
