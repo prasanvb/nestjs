@@ -15,7 +15,7 @@ export class MessagesService {
     this.messagesRepo = messagesRepo;
   }
 
-  // Other way of writtig the constructor
+  // Other way of writing the constructor
   // constructor(public messagesRepo: MessagesRepositories) {}
 
   findAll() {

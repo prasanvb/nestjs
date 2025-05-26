@@ -8,3 +8,4 @@ dist
 # Ignore files
 *.log
 *.js
+*.DS_Store
