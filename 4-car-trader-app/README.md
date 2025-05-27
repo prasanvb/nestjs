@@ -25,7 +25,7 @@
     - Finally, connect the entity to the root connection in the app module.
 
 - [TypeORM Repository API](https://typeorm.io/repository-api): Repository is specific to an entity. In other words, each entity will have its own, build-in repository and it can be accessed using getRepository() method
-  - `create()` - Makes a new instance of an entity, but does not persist it to the DB
+  - `create()` - Generates new entity instance, but does not store data into the DB
   - `save()` - Adds or updates a record to the DB
   - `find()` - Runs a query and returns a list of entities
   - `findOne()` - Run a query, returning the first record matching the search criteria
