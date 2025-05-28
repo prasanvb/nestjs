@@ -19,8 +19,37 @@ export class UsersService {
     /* NOTE: Alternatively, we could call this.repo.save({ email, password }) directly.
        However, this would save the data without first creating a User entity instance.
        Creating the entity instance (with this.repo.create) ensures that TypeORM entity hooks
-       like AfterInsert and AfterUpdate are triggered as expected.
+       like AfterInsert, AfterRemove and AfterUpdate are triggered as expected.
     */
     return this.repo.save(user);
+  }
+
+  findOne(id: number) {
+    return this.repo.findOneBy({ id });
+  }
+
+  findByEmail(email: string) {
+    return this.repo.find({ where: { email } });
+  }
+
+  async update(id: number, attributes: Partial<User>) {
+    const user = await this.findOne(id);
+
+    if (!user) {
+      throw new Error(`user with ${id} not found`);
+    }
+    Object.assign(user, attributes);
+
+    return this.repo.save(user);
+  }
+
+  async remove(id: number) {
+    const user = await this.findOne(id);
+
+    if (!user) {
+      throw new Error(`user with ${id} not found`);
+    }
+
+    return this.repo.remove(user);
   }
 }
