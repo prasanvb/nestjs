@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "./users.entity";
@@ -14,8 +14,6 @@ export class UsersService {
   create(email: string, password: string) {
     /* create typeorm repository method generates a user entity instance */
     const user = this.repo.create({ email, password });
-
-    console.log({ user });
 
     /* save typeorm repository method saves the user entity instance created to the database */
     /* NOTE: Alternatively, we could call this.repo.save({ email, password }) directly.
@@ -38,7 +36,7 @@ export class UsersService {
     const user = await this.findOne(id);
 
     if (!user) {
-      throw new Error(`user with ${id} not found`);
+      throw new NotFoundException(`user with id:${id} not found`);
     }
 
     Object.assign(user, attributes);
@@ -50,7 +48,7 @@ export class UsersService {
     const user = await this.findOne(id);
 
     if (!user) {
-      throw new Error(`user with ${id} not found`);
+      throw new NotFoundException(`user with id:${id} not found`);
     }
 
     return this.repo.remove(user);
