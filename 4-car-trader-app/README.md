@@ -24,11 +24,12 @@
       - `TypeOrmModule.forFeature([User])` added to imports
     - Finally, connect the entity to the root connection in the app module.
 
-- [TypeORM Repository API](https://typeorm.io/repository-api): Repository is specific to an entity. In other words, each entity will have its own, build-in repository and it can be accessed using getRepository() method
+- [TypeORM Repository API](https://typeorm.io/repository-api): Repository is specific to an entity. In other words, each entity will have its own, build-in repository
   - `create()` - Generates new entity instance, but does not store data into the DB
   - `save()` - Adds or updates a record to the DB
   - `find()` - Runs a query and returns a list of entities
   - `findOne()` - Run a query, returning the first record matching the search criteria
   - `remove()` - Remove a record from the DB
+    NOTE: Some methods are designed to work on an Entity instance (i.e.entity hooks like AfterInsert, AfterRemove and AfterUpdate are triggered), example: `remove()`, `save()`. Where as some methods just work directly on DB without an entity instance, example: `insert()`, `update()` & `delete()`.
 - **Migration** alters the structure of the database and its data. In TypeORM, the `synchronize: true` feature handles migrations automatically, so we don't need to write any explicit migration SQL scripts for the development environment.
   **IMPORTANT:** Never set the `synchronize` flag to `true` in a production environment.
