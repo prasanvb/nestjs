@@ -15,6 +15,8 @@ export class UsersService {
     /* create typeorm repository method generates a user entity instance */
     const user = this.repo.create({ email, password });
 
+    console.log({ user });
+
     /* save typeorm repository method saves the user entity instance created to the database */
     /* NOTE: Alternatively, we could call this.repo.save({ email, password }) directly.
        However, this would save the data without first creating a User entity instance.
@@ -38,6 +40,7 @@ export class UsersService {
     if (!user) {
       throw new Error(`user with ${id} not found`);
     }
+
     Object.assign(user, attributes);
 
     return this.repo.save(user);

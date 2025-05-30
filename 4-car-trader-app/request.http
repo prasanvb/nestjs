@@ -7,6 +7,24 @@ POST http://localhost:3000/user/auth/signup
 Content-Type: application/json
 
 {
-  "email": "prasan@gmail.com",
-  "password": "sample1"
+  "email": "test@gmail.com",
+  "password": "test"
+}
+
+### Fetch user by id
+GET http://localhost:3000/user/1
+
+### Fetch all user with matching email
+GET http://localhost:3000/user?email=dev@gmail.com
+
+### Remove user by id
+DELETE http://localhost:3000/user/3
+
+### Update user data by id
+PATCH http://localhost:3000/user/4
+Content-Type: application/json
+
+{
+  "email": "dev@gmail.com",
+  "password": "dev"
 }
