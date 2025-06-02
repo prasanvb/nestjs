@@ -33,3 +33,32 @@
     NOTE: Some methods are designed to work on an Entity instance (i.e.entity hooks like AfterInsert, AfterRemove and AfterUpdate are triggered), example: `remove()`, `save()`. Where as some methods just work directly on DB without an entity instance, example: `insert()`, `update()` & `delete()`.
 - **Migration** alters the structure of the database and its data. In TypeORM, the `synchronize: true` feature handles migrations automatically, so we don't need to write any explicit migration SQL scripts for the development environment.
   **IMPORTANT:** Never set the `synchronize` flag to `true` in a production environment.
+
+## Interceptors (Middlewares)
+
+- Interceptors can mess around with incoming requests and/or outgoing responses
+- We can as many interceptors as we want
+- Interceptors can be applied at route level, controller or gloabl
+
+### Class Serializer Interceptor Approach (Nest recommended)
+
+- NestJS's built-in solution (e.g., `@Exclude`) lacks dynamic control over what fields are serialized.
+- Turns the instance of the entity into a plain object based on some rules set in the entity file
+- `@UseInterceptors()` Decorator that binds interceptors to the scope of the controller or method, depending on its context.
+  - When `@UseInterceptors` is used at the controller level, the interceptor will be applied to every handler (method) in the controller.
+  - When `@UseInterceptors` is used at the individual handler level, the interceptor will apply only to that specific method.
+  - `@param` a single interceptor instance or class, or a list of interceptor instances or classes.
+- `ClassSerializerInterceptor` interceptor uses the powerful class-transformer package to provide a declarative and extensible way of transforming objects. The basic operation it performs is to take the value returned by a method handler and apply the `instanceToPlain()` function from class-transformer. In doing so, it can apply rules expressed by class-transformer decorators (example: `Exclude()`) on an entity/DTO class,
+
+### [Custom Interceptor approach using DTO's](4-car-trader-app/src/users/interceptor/serialize.intercept.ts)
+
+- Create a custom interceptor to handle response transformation
+  - Converts the user entity to a plain object.
+  - Applies serialization rules defined in custom DTOs (Data Transfer Objects).
+- Introduce different DTOs for different route handlers (e.g., AdminUserDTO, PublicUserDTO).
+
+```typescript
+class CustomInterceptor {
+  intercept(context: ExecutionContext, next: CallHandler) {}
+}
+```

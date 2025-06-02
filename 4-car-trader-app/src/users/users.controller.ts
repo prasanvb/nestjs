@@ -9,11 +9,19 @@ import {
   Query,
   Delete,
   NotFoundException,
+  /*
+    NOTE: Class Serializer Interceptor Approach
+    UseInterceptors,
+    ClassSerializerInterceptor, 
+  */
 } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
+import { ViewUserDto } from "./dto/view-user.dto";
+import { Serialize } from "./interceptor/serialize.intercept";
 
 @Controller("user")
+@Serialize(ViewUserDto)
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
@@ -24,8 +32,14 @@ export class UsersController {
     return this.usersService.create(email, password);
   }
 
+  /*
+    NOTE: Class Serializer Interceptor Approach
+    @UseInterceptors(ClassSerializerInterceptor)
+  */
+
   @Get(":id")
   async findUser(@Param("id") id: string) {
+    console.log("Handler is running");
     const user = await this.usersService.findOne(parseInt(id));
     if (!user) {
       throw new NotFoundException(`user with id:${id} not found`);

@@ -32,7 +32,11 @@
 
 ## Data Transfer Object ([DTO](src/messages/dto/create-message.dto.ts))
 
-- A DTO is a class that defines the properties required in the request body.
+- A DTO is a class that defines the properties required in the request body and response object. Dto's don't hold any business logic.
+
+  - Serialization transforms an object's data into a stream of bytes, making it suitable for storage in files, transmission over networks, or persistence in databases.
+  - Deserialization takes the serialized data (e.g., a stream of bytes or a JSON string) and reconstructs the original object or data structure.
+
 - Add validation decorators (example: `@IsString()`) to the properties of the DTO class using the `class-validator` package.
 - The [DTO class](src/messages/messages.controller.ts), along with its validation rules, is applied to the request body in the route method.
 - Under the hood, DTOs utilize [class-transformer](https://www.npmjs.com/package/class-transformer/) and [class-validator](https://www.npmjs.com/package/class-validator) for data validation:

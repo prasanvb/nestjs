@@ -1,11 +1,9 @@
-import {
-  AfterInsert,
-  AfterUpdate,
-  AfterRemove,
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { AfterInsert, AfterUpdate, AfterRemove, Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+
+/* 
+  NOTE: Class Serializer Interceptor Approach
+  import { Exclude } from "class-transformer"; 
+*/
 
 @Entity()
 export class User {
@@ -16,6 +14,10 @@ export class User {
   email: string;
 
   @Column()
+  /* 
+    NOTE: Class Serializer Interceptor Approach
+    @Exclude() 
+  */
   password: string;
 
   @AfterInsert()
