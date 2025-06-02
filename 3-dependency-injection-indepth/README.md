@@ -6,6 +6,16 @@
 - `nest generate controller computer` - generates a controller with name computer
   NOTE: If a module name already exists with same name as the service or controller, then the service or controller will be created inside the module.
 
+## Dependency Injection
+
+- Dependency injection is all about making use of inversion of control, but not having to create a ton of different classes or a ton of different instances every single time. Wire up the different class into the Nest DI container/Injector using the @Injectable decorator
+- DI container/Injector flow
+  - At startup, register all classes with the container
+  - Container will figure out what each dependency each class has
+  - We then ask the container to create an instance of a class for us
+  - Container creates all required dependencies and gives us the instance
+  - Container will hold onto the created dependency instances and reuse them if needed
+
 ## Decorator definitions
 
 - `@Controller()` Decorator that marks a class as a Nest controller that can receive inbound requests and produce
