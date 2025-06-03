@@ -28,3 +28,13 @@ Content-Type: application/json
   "email": "dev@gmail.com",
   "password": "dev"
 }
+
+
+### New user sign up
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+  "email": "dev@gmail.com",
+  "password": "dev"
+}
