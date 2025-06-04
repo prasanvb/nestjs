@@ -2,6 +2,10 @@
 
 - Validation pipe option `whitelist:true` strips in-valid properties from the incoming body object for security
 
+## HTTP Request using REST client vscode extension
+
+- Add REST calls to a `.http` file. Example : [request.http](4-car-trader-app/request.http)
+
 ## RDBMS
 
 - Entity: An entity is a "thing" or "object" in the real world. An entity contains attributes, which describe that entity. So anything about which we store information is called an entity.

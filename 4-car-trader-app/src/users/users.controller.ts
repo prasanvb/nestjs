@@ -36,7 +36,6 @@ export class UsersController {
     NOTE: Class Serializer Interceptor Approach
     @UseInterceptors(ClassSerializerInterceptor)
   */
-
   @Get(":id")
   async findUser(@Param("id") id: string) {
     console.log("Handler is running");

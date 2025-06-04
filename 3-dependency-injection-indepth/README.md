@@ -23,9 +23,9 @@
 - `@Injectable()` Decorator that marks a class as a provider. Providers can be injected into other classes via constructor parameter injection using Nest's built-in Dependency Injection (DI) system.
 - `@Module()` Decorator that marks a class as a module. Modules are used by Nest to organize the application structure into scopes. Controllers and Providers are scoped by the module they are declared in. Modules and their classes (Controllers and Providers) form a graph that determines how Nest performs Dependency Injection (DI).
   - `imports` array is used to import other modules that this module depends on. Once module is imported all the exported services of the imported module can be used in this module.
-  - `exports` list of the subset of providers that are provided by this module and should be available in other modules which import this module.
+  - `exports` list of the subset of providers (i.e. services) that are provided by this module and should be available in other modules which import this module.
   - `controllers` list of controllers defined in this module which have to be instantiated.
-  - `providers` list of providers that will be instantiated by the Nest injector and that may be shared at least across this module.
+  - `providers` list of providers that will be instantiated by the Nest injector and that may be shared at least across this module. Uou cannot add services from other modules inside the providers.
 
 ## Exporting Services between different modules
 
