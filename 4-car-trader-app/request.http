@@ -30,11 +30,21 @@ Content-Type: application/json
 }
 
 
-### New user sign up
+### Create new user sign up
 POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "email": "devs3@gmail.com",
-  "password": "dev"
+  "email": "pvb@gmail.com",
+  "password": "pvb"
 }
+
+### Authenticate user login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "pvb@gmail.com",
+  "password": "pvb"
+}
+

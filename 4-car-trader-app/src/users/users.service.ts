@@ -29,7 +29,6 @@ export class UsersService {
   }
 
   findByEmail(email: string) {
-    console.log("findByEmail", { email });
     return this.repo.find({ where: { email } });
   }
 

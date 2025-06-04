@@ -15,7 +15,7 @@ import {
     ClassSerializerInterceptor, 
   */
 } from "@nestjs/common";
-import { CreateUserDto } from "./dto/create-user.dto";
+import { UserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { ViewUserDto } from "./dto/view-user.dto";
 import { Serialize } from "./interceptor/serialize.intercept";
@@ -26,7 +26,7 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Post("auth/signup")
-  createUser(@Body() body: CreateUserDto) {
+  createUser(@Body() body: UserDto) {
     const { email, password } = body;
 
     return this.usersService.create(email, password);
