@@ -35,6 +35,6 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "email": "devs2@gmail.com",
+  "email": "devs3@gmail.com",
   "password": "dev"
 }
