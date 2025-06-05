@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Session,
+  UseInterceptors,
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { UsersService } from "src/users/users.service";
@@ -14,8 +15,11 @@ import { UserDto } from "src/users/dto/create-user.dto";
 import { ViewUserDto } from "src/users/dto/view-user.dto";
 import { Serialize } from "src/users/interceptor/serialize.intercept";
 import { CurrentUser } from "src/users/decorator/current-user.decorator";
+import { CurrentUserInterceptor } from "../users/interceptor/current-user.interceptor";
+import { User } from "src/users/users.entity";
 
 @Controller("auth")
+@UseInterceptors(CurrentUserInterceptor)
 export class authController {
   constructor(
     private authService: AuthService,
@@ -68,6 +72,11 @@ export class authController {
     return authenticatedUser;
   }
 
+  @Post("/logout")
+  logout(@Session() Session: any) {
+    Session.userId = null;
+  }
+
   @Get("identify-session")
   @Serialize(ViewUserDto)
   async identifyUser(@Session() session: any) {
@@ -79,8 +88,10 @@ export class authController {
     return user;
   }
 
+  // NOTE: custom CurrentUser decorator uses interceptor
   @Get("whoami")
-  whoAmI(@CurrentUser() user: string) {
+  @Serialize(ViewUserDto)
+  whoAmI(@CurrentUser() user: User) {
     return user;
   }
 
