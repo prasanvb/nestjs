@@ -43,6 +43,11 @@
 - Interceptors can mess around with incoming requests and/or outgoing responses
 - We can as many interceptors as we want
 - Interceptors can be applied at route level, controller or global
+- Code inside the interceptor triggered in 2 occassion
+  - Interceptor code executed prior to the route handler being triggered
+  - Interceptor code executed before the API response is sent
+- Gloablly scoped interceptor can be used aby module or controller or service [example](4-car-trader-app/src/users/users.module.ts)
+
 
 ### Class Serializer Interceptor Approach (Nest recommended)
 
