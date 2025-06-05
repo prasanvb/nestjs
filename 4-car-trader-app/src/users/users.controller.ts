@@ -3,7 +3,6 @@ import {
   Body,
   Controller,
   Get,
-  Post,
   Patch,
   Param,
   Query,
@@ -15,7 +14,6 @@ import {
     ClassSerializerInterceptor, 
   */
 } from "@nestjs/common";
-import { UserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { ViewUserDto } from "./dto/view-user.dto";
 import { Serialize } from "./interceptor/serialize.intercept";
@@ -24,13 +22,6 @@ import { Serialize } from "./interceptor/serialize.intercept";
 @Serialize(ViewUserDto)
 export class UsersController {
   constructor(private usersService: UsersService) {}
-
-  @Post("auth/signup")
-  createUser(@Body() body: UserDto) {
-    const { email, password } = body;
-
-    return this.usersService.create(email, password);
-  }
 
   /*
     NOTE: Class Serializer Interceptor Approach

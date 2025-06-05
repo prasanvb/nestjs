@@ -1,15 +1,28 @@
 // HTTP Request using REST client vscode extension
 // Compose MULTIPLE requests in a single file (separated by ### delimiter)
-
-### Sign up user
 // NOTE: Single line space below content type is mandatory
-POST http://localhost:3000/user/auth/signup
+
+
+### Create new user sign up
+POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "email": "test@gmail.com",
-  "password": "test"
+  "email": "pvbi@gmail.com",
+  "password": "pvbi"
 }
+
+### Login existing user 
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "pvb2@gmail.com",
+  "password": "pvbi"
+}
+
+### Identify user session
+GET http://localhost:3000/auth/identify-session
 
 ### Fetch user by id
 GET http://localhost:3000/user/9
@@ -30,21 +43,11 @@ Content-Type: application/json
 }
 
 
-### Create new user sign up
-POST http://localhost:3000/auth/signup
-Content-Type: application/json
 
-{
-  "email": "pvb2@gmail.com",
-  "password": "pvb"
-}
+### Session Example
+### Set colors session cookie
+GET http://localhost:3000/auth/colors/red
 
-### Authenticate user login
-POST http://localhost:3000/auth/login
-Content-Type: application/json
 
-{
-  "email": "pvb2@gmail.com",
-  "password": "pvb"
-}
-
+### Get colors session cookie
+GET http://localhost:3000/auth/colors

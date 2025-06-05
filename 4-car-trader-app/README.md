@@ -66,3 +66,29 @@ class CustomInterceptor {
   intercept(context: ExecutionContext, next: CallHandler) {}
 }
 ```
+
+## Cookie-Session
+
+- Incoming Request: Contains a Cookie header with an encrypted string of numbers and letters
+
+Example: HTTP response Header with session cookie
+
+```text
+Set-Cookie: session=eyJjb2xvciI6InJlZCJ9; path=/; expires=Thu, 05 Jun 2025 05:18:43 GMT; httponly,session.sig=1C7_KKdtGBqXyOsv5l7NH-q2K9I; path=/; expires=Thu, 05 Jun 2025 05:18:43 GMT; httponly
+```
+
+- Decryption: Cookie-session library decodes the encrypted string into a plain JavaScript session object
+- Session Access: Route handlers can read from and modify the session object using decorators
+- Encryption & Response: Modified session data is re-encrypted and sent back via Set-Cookie header. If the session data does not change then HTTP response header is not updated.
+
+Example Workflow
+
+```text
+Request Cookie: "abc123xyz..." (encrypted)
+    ↓
+Session Object: { color: "red" }
+    ↓
+Modify in Handler: { color: "blue" }
+    ↓
+Response Set-Cookie: "def456uvw..." (newly encrypted)
+```
