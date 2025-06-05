@@ -13,13 +13,14 @@ export class AuthService {
   async createNewUser(email: string, password: string) {
     // Hashing new user password
     // Generate a salt
-    const salt = randomBytes(8);
+    const salt: string = randomBytes(8).toString("hex");
 
     // Hash the salt and the password together
-    const hash = (await scrypt(password, salt, 32)) as Buffer<ArrayBufferLike>;
+    const hashBuffer = (await scrypt(password, salt, 32)) as Buffer<ArrayBufferLike>;
+    const hash: string = hashBuffer.toString("hex");
 
     // Join the hashed result and the salt together
-    const hashedPassword = salt.toString("hex") + "." + hash.toString("hex");
+    const hashedPassword = salt + "." + hash;
 
     // Create new user and save it
     const newlyCreatedUser = await this.usersService.create(email, hashedPassword);
@@ -32,13 +33,11 @@ export class AuthService {
     // Comparing hashed passwords to authenticate user
     const [salt, hashedPassword] = user.password.split(".");
 
-    console.log({ password });
     // Hash the salt and the password together
-    const hash = (await scrypt(password, salt, 32)) as Buffer<ArrayBufferLike>;
+    const hashBuffer = (await scrypt(password, salt, 32)) as Buffer<ArrayBufferLike>;
+    const hash: string = hashBuffer.toString("hex");
 
-    console.log({ hashedPassword });
-    console.log({ hash: hash.toString("hex") });
-    if (hashedPassword !== hash.toString("hex")) {
+    if (hashedPassword !== hash) {
       throw new BadRequestException("User authentication failed");
     }
 
