@@ -1,4 +1,13 @@
-import { BadRequestException, Body, Controller, Get, NotFoundException, Param, Post, Session } from "@nestjs/common";
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+  Session,
+} from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { UsersService } from "src/users/users.service";
 import { UserDto } from "src/users/dto/create-user.dto";
@@ -47,7 +56,10 @@ export class authController {
       throw new BadRequestException("Email does not exits");
     }
 
-    const authenticatedUser = await this.authService.authenticateUser(user, password);
+    const authenticatedUser = await this.authService.authenticateUser(
+      user,
+      password
+    );
 
     // Create a session with user id
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
