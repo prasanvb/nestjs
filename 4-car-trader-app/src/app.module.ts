@@ -20,7 +20,12 @@ const typeOrmModuleOptions: TypeOrmModuleOptions = {
 };
 
 @Module({
-  imports: [AuthModule, UsersModule, ReportsModule, TypeOrmModule.forRoot(typeOrmModuleOptions)],
+  imports: [
+    AuthModule,
+    UsersModule,
+    ReportsModule,
+    TypeOrmModule.forRoot(typeOrmModuleOptions),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
