@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Session,
+  UseGuards,
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { UsersService } from "src/users/users.service";
@@ -15,6 +16,7 @@ import { ViewUserDto } from "src/users/dto/view-user.dto";
 import { Serialize } from "src/users/interceptor/serialize.intercept";
 import { CurrentUser } from "src/users/decorator/current-user.decorator";
 import { User } from "src/users/users.entity";
+import { AuthGaurd } from "./gaurds/auth.gaurds";
 
 @Controller("auth")
 export class authController {
@@ -88,6 +90,7 @@ export class authController {
 
   // NOTE: custom CurrentUser decorator that uses interceptor to find the currently loged in user
   @Get("whoami")
+  @UseGuards(AuthGaurd)
   @Serialize(ViewUserDto)
   whoAmI(@CurrentUser() user: User) {
     return user;

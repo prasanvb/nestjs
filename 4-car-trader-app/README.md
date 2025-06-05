@@ -47,6 +47,7 @@
   - Interceptor code executed prior to the route handler being triggered
   - Interceptor code executed before the API response is sent
 - Gloablly scoped interceptor can be used aby module or controller or service [example](4-car-trader-app/src/users/users.module.ts)
+  - Drawbacks: Since the interceptor is scoped global, there might be some routes which doesn't require them but we still make DB queries
 
 
 ### Class Serializer Interceptor Approach (Nest recommended)
@@ -96,4 +97,23 @@ Session Object: { color: "red" }
 Modify in Handler: { color: "blue" }
     ↓
 Response Set-Cookie: "def456uvw..." (newly encrypted)
+```
+
+
+## Gaurds
+
+- Guards prevent access to global/controllers/routes based on specific conditions
+  - application-wide, controller-level, or individual handler-level
+- `canActivate()` function must be implemented by a guard and return value indicates whether or not the current request is allowed to proceed. Return can be either synchronous (boolean) or asynchronous (Promise or Observable).
+- Return truthy values to allow access, falsy values to deny access (i.e. Returns 403 Forbidden)
+- `@UseGuards(AuthGuard)` decorator that binds guards to the scope of the controller or method, depending on its context.
+- Guards can also be set up globally for all controllers and routes using app.useGlobalGuards()
+
+``` typescript
+export class AuthGuard implements CanActivate {
+  canActivate(context: ExecutionContext) {
+    const request = context.switchToHttp().getRequest();
+    return request.session.userId; // Allow if userId exists in session
+  }
+}
 ```
