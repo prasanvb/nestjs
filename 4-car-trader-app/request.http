@@ -2,7 +2,7 @@
 // Compose MULTIPLE requests in a single file (separated by ### delimiter)
 // NOTE: Single line space below content type is mandatory
 
-
+### Auth Routes
 ### Create new user sign up
 POST http://localhost:3000/auth/signup
 Content-Type: application/json
@@ -18,12 +18,18 @@ Content-Type: application/json
 
 {
   "email": "pvb2@gmail.com",
-  "password": "pvbi"
+  "password": "pvb"
 }
 
 ### Identify user session
 GET http://localhost:3000/auth/identify-session
 
+### Who Am I user session
+GET http://localhost:3000/auth/whoami
+
+
+
+### User Routes
 ### Fetch user by id
 GET http://localhost:3000/user/9
 

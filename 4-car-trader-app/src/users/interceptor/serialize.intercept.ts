@@ -19,13 +19,13 @@ export class SerializeInterceptor implements NestInterceptor {
 
   intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
     // FYI: Code placed here will be executed before the request is handled
-    console.log("Running before the handler", { context });
+    console.log("Executing prior to the route handler being triggered", { context });
 
     return next.handle().pipe(
       // FYI: data is an entity instance
       map((data: any) => {
         // FYI: Code placed here will be executed before the response is sent out
-        console.log("Running before response is sent", data);
+        console.log("Running before the API response is sent", data);
         // NOTE: entity instance is converted to a DTO instance. DTO instance holds all the serialization rules. NestJS takes the DTO instance and converts it to JSON object
         return plainToClass(this.dto, data, {
           /* 

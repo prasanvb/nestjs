@@ -42,7 +42,7 @@
 
 - Interceptors can mess around with incoming requests and/or outgoing responses
 - We can as many interceptors as we want
-- Interceptors can be applied at route level, controller or gloabl
+- Interceptors can be applied at route level, controller or global
 
 ### Class Serializer Interceptor Approach (Nest recommended)
 

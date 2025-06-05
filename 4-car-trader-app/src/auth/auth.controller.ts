@@ -4,6 +4,7 @@ import { UsersService } from "src/users/users.service";
 import { UserDto } from "src/users/dto/create-user.dto";
 import { ViewUserDto } from "src/users/dto/view-user.dto";
 import { Serialize } from "src/users/interceptor/serialize.intercept";
+import { CurrentUser } from "src/users/decorator/current-user.decorator";
 
 @Controller("auth")
 export class authController {
@@ -63,6 +64,11 @@ export class authController {
     if (!user) {
       throw new NotFoundException(`No session user found`);
     }
+    return user;
+  }
+
+  @Get("whoami")
+  whoAmI(@CurrentUser() user: string) {
     return user;
   }
 
