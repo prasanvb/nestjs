@@ -2,14 +2,12 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { INestApplication } from "@nestjs/common";
 import * as request from "supertest";
 import { App } from "supertest/types";
-import { AppModule } from "./../src/app.module";
+import { AppModule } from "../src/app.module";
+import { setUpMiddlewares } from "../src/middlewares";
+import { signUpUserDatatype } from "./e2e.interface";
 
-interface signUpUserDatatype {
-  email: string;
-  id: number;
-}
 const signUpUserData = {
-  email: "prasanbv1@gmail.com",
+  email: "prasanbpv2@gmail.com",
   password: "prasan",
 };
 
@@ -19,10 +17,10 @@ describe("AppController (e2e)", () => {
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
-
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    setUpMiddlewares(app);
     await app.init();
   });
 

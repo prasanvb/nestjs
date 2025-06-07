@@ -27,7 +27,7 @@ export class authController {
 
   @Post("signup")
   @Serialize(ViewUserDto)
-  async userSignUp(@Body() body: UserDto, @Session() session: any) {
+  async userSignUp(@Body() body: UserDto, @Session() session: CookieSessionInterfaces.CookieSessionObject) {
     const { email, password } = body;
 
     // Check if the user email already exists
@@ -41,7 +41,6 @@ export class authController {
     const user = await this.authService.createNewUser(email, password);
 
     // Create a session with user id
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     session.userId = user.id;
 
     return user;
@@ -49,7 +48,7 @@ export class authController {
 
   @Post("login")
   @Serialize(ViewUserDto)
-  async login(@Body() body: UserDto, @Session() session) {
+  async login(@Body() body: UserDto, @Session() session: CookieSessionInterfaces.CookieSessionObject) {
     const { email, password } = body;
 
     // Check if the user email already exists
@@ -62,23 +61,21 @@ export class authController {
     const authenticatedUser = await this.authService.authenticateUser(user, password);
 
     // Create a session with user id
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     session.userId = authenticatedUser.id;
 
     return authenticatedUser;
   }
 
   @Post("/logout")
-  logout(@Session() Session: { userId: number | null }) {
+  logout(@Session() Session: CookieSessionInterfaces.CookieSessionObject) {
     Session.userId = null;
-    return { sessionUserID: Session.userId };
+    return { sessionUserID: Session.userId as null };
   }
 
   @Get("identify-session")
   @Serialize(ViewUserDto)
-  async identifyUser(@Session() session: any) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-    const user = await this.usersService.findOne(parseInt(session.userId));
+  async identifyUser(@Session() session: CookieSessionInterfaces.CookieSessionObject) {
+    const user = await this.usersService.findOne(parseInt(session.userId as string));
     if (!user) {
       throw new NotFoundException(`No session user found`);
     }
