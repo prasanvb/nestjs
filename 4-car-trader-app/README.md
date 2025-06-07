@@ -49,7 +49,6 @@
 - Gloablly scoped interceptor can be used aby module or controller or service [example](4-car-trader-app/src/users/users.module.ts)
   - Drawbacks: Since the interceptor is scoped global, there might be some routes which doesn't require them but we still make DB queries
 
-
 ### Class Serializer Interceptor Approach (Nest recommended)
 
 - NestJS's built-in solution (e.g., `@Exclude`) lacks dynamic control over what fields are serialized.
@@ -99,7 +98,6 @@ Modify in Handler: { color: "blue" }
 Response Set-Cookie: "def456uvw..." (newly encrypted)
 ```
 
-
 ## Gaurds
 
 - Guards prevent access to global/controllers/routes based on specific conditions
@@ -109,7 +107,7 @@ Response Set-Cookie: "def456uvw..." (newly encrypted)
 - `@UseGuards(AuthGuard)` decorator that binds guards to the scope of the controller or method, depending on its context.
 - Guards can also be set up globally for all controllers and routes using app.useGlobalGuards()
 
-``` typescript
+```typescript
 export class AuthGuard implements CanActivate {
   canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest();

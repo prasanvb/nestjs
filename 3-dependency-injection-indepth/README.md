@@ -25,7 +25,7 @@
   - `imports` array is used to import other modules that this module depends on. Once module is imported all the exported services of the imported module can be used in this module.
   - `exports` list of the subset of providers (i.e. services) that are provided by this module and should be available in other modules which import this module.
   - `controllers` list of controllers defined in this module which have to be instantiated.
-  - `providers` list of providers that will be instantiated by the Nest injector and that may be shared at least across this module. Uou cannot add services from other modules inside the providers.
+  - `providers` list of providers that will be instantiated by the Nest injector and that may be shared at least across this module. You cannot add services from other modules inside the providers.
 
 ## Exporting Services between different modules
 
