@@ -10,12 +10,12 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
-import { UsersService } from "src/users/users.service";
-import { UserDto } from "src/users/dto/create-user.dto";
-import { ViewUserDto } from "src/users/dto/view-user.dto";
-import { Serialize } from "src/users/interceptor/serialize.intercept";
-import { CurrentUser } from "src/users/decorator/current-user.decorator";
-import { User } from "src/users/users.entity";
+import { UsersService } from "../users/users.service";
+import { UserDto } from "../users/dto/create-user.dto";
+import { ViewUserDto } from "../users/dto/view-user.dto";
+import { Serialize } from "../users/interceptor/serialize.intercept";
+import { CurrentUser } from "../users/decorator/current-user.decorator";
+import { User } from "../users/users.entity";
 import { AuthGaurd } from "./gaurds/auth.gaurds";
 
 @Controller("auth")
@@ -59,10 +59,7 @@ export class authController {
       throw new BadRequestException("Email does not exits");
     }
 
-    const authenticatedUser = await this.authService.authenticateUser(
-      user,
-      password
-    );
+    const authenticatedUser = await this.authService.authenticateUser(user, password);
 
     // Create a session with user id
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -72,7 +69,7 @@ export class authController {
   }
 
   @Post("/logout")
-  logout(@Session() Session: any) {
+  logout(@Session() Session: { userId: number | null }) {
     Session.userId = null;
     return { sessionUserID: Session.userId };
   }
