@@ -1,5 +1,11 @@
 # NestJS-Car-Trader
 
+## Notes
+
+- When using `process.env.NODE_ENV` it looks for the env value in the `"start:dev": "NODE_ENV=development nest start --watch"`
+- Create 2 different env files and 2 different db names
+  - `.env.development` => `DB_NAME=db.sqlite`
+  - `.env.test` => `DB_NAME=test.sqlite`
 - Validation pipe option `whitelist:true` strips in-valid properties from the incoming body object for security
 
 ## HTTP Request using REST client vscode extension

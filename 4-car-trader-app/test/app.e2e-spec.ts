@@ -7,7 +7,7 @@ import { setUpMiddlewares } from "../src/middlewares";
 import { signUpUserDatatype } from "./e2e.interface";
 
 const signUpUserData = {
-  email: "prasanbpv2@gmail.com",
+  email: "prasanbpv3@gmail.com",
   password: "prasan",
 };
 
