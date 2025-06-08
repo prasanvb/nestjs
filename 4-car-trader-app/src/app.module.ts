@@ -12,7 +12,7 @@ import { cookieSessionSetup, pipeSetUp } from "./middlewares";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { RequestHandler } from "express";
 
-console.log("process.env.NODE_ENV", process.env.NODE_ENV);
+console.log("process.env.NODE_ENV: ", process.env.NODE_ENV);
 
 /* 
   Config Modules
@@ -22,19 +22,16 @@ const NestConfigModule = ConfigModule.forRoot({ isGlobal: true, envFilePath: `.e
 // const TypeOrmConfigModule = TypeOrmModule.forRoot({});
 const NewTypeOrmConfigModule = TypeOrmModule.forRootAsync({
   inject: [ConfigService],
-  useFactory: (config: ConfigService) => {
-    console.log(config);
-    return {
-      type: "sqlite",
-      database: config.get<string>("DB_NAME"),
-      // Entities to be loaded for this connection. Accepts both entity classes and directories where from entities need to be loaded.
-      entities: [User, Report],
-      // `synchronize: true` - Indicates if database schema should be auto created on every application launch. Be careful with this option and don't use this in production - otherwise you can lose production data. This option is useful during debug and development.
-      synchronize: true,
-      // console logging for a DB queries made
-      logging: true,
-    };
-  },
+  useFactory: (config: ConfigService) => ({
+    type: "sqlite",
+    database: config.get<string>("DB_NAME"),
+    // Entities to be loaded for this connection. Accepts both entity classes and directories where from entities need to be loaded.
+    entities: [User, Report],
+    // `synchronize: true` - Indicates if database schema should be auto created on every application launch. Be careful with this option and don't use this in production - otherwise you can lose production data. This option is useful during debug and development.
+    synchronize: true,
+    // console logging for a DB queries made
+    logging: true,
+  }),
 });
 
 @Module({
