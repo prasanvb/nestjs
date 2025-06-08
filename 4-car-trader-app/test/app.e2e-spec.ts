@@ -7,7 +7,7 @@ import { setUpMiddlewares } from "../src/middlewares";
 import { signUpUserDatatype } from "./e2e.interface";
 
 const signUpUserData = {
-  email: "prasanbpv3@gmail.com",
+  email: "prasanv1@gmail.com",
   password: "prasan",
 };
 
@@ -34,5 +34,23 @@ describe("AppController (e2e)", () => {
         expect(id).toBeDefined();
         expect(email).toEqual(signUpUserData.email);
       });
+  });
+
+  it("get the current logged in user after successful sign up", async () => {
+    const email = "prasanv2@gmail.com";
+    const res = await request(app.getHttpServer())
+      .post("/auth/signup")
+      .send({ ...signUpUserData, ...{ email } })
+      .expect(201);
+
+    const cookie = res.get("set-Cookie");
+
+    if (cookie) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const { body } = await request(app.getHttpServer()).get("/auth/whoami").set("Cookie", cookie).expect(200);
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      expect(body.email).toEqual(email);
+    }
   });
 });
