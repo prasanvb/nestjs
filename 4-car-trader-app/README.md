@@ -104,7 +104,7 @@ Modify in Handler: { color: "blue" }
 Response Set-Cookie: "def456uvw..." (newly encrypted)
 ```
 
-## Gaurds
+## Guards
 
 - Guards prevent access to global/controllers/routes based on specific conditions
   - application-wide, controller-level, or individual handler-level

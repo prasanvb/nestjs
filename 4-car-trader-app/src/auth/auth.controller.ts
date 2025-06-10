@@ -16,7 +16,7 @@ import { ViewUserDto } from "../users/dto/view-user.dto";
 import { Serialize } from "../users/interceptor/serialize.intercept";
 import { CurrentUser } from "../users/decorator/current-user.decorator";
 import { User } from "../users/users.entity";
-import { AuthGaurd } from "./gaurds/auth.gaurds";
+import { AuthGuard } from "./guards/auth.gaurds";
 
 @Controller("auth")
 export class authController {
@@ -84,7 +84,7 @@ export class authController {
 
   // NOTE: custom CurrentUser decorator that uses interceptor to find the currently loged in user
   @Get("whoami")
-  @UseGuards(AuthGaurd)
+  @UseGuards(AuthGuard)
   @Serialize(ViewUserDto)
   whoAmI(@CurrentUser() user: User) {
     return user;
