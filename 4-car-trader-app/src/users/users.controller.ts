@@ -16,7 +16,7 @@ import {
 } from "@nestjs/common";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { ViewUserDto } from "./dto/view-user.dto";
-import { Serialize } from "./interceptor/serialize.intercept";
+import { Serialize } from "./interceptor/serialize.interceptor";
 
 @Controller("user")
 @Serialize(ViewUserDto)

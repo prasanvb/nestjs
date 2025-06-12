@@ -13,7 +13,7 @@ import { AuthService } from "./auth.service";
 import { UsersService } from "../users/users.service";
 import { UserDto } from "../users/dto/create-user.dto";
 import { ViewUserDto } from "../users/dto/view-user.dto";
-import { Serialize } from "../users/interceptor/serialize.intercept";
+import { Serialize } from "../users/interceptor/serialize.interceptor";
 import { CurrentUser } from "../users/decorator/current-user.decorator";
 import { User } from "../users/users.entity";
 import { AuthGuard } from "./guards/auth.gaurds";
