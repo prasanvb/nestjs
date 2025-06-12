@@ -3,7 +3,7 @@ import { Report } from "../reports/reports.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { CreateReportsDto } from "./dto/create-reports.dto";
-import { User } from "src/users/users.entity";
+import { User } from "../users/users.entity";
 
 @Injectable()
 export class ReportsService {

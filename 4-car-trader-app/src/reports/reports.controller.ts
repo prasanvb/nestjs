@@ -3,7 +3,7 @@ import { Body, Controller, Post, UseGuards } from "@nestjs/common";
 import { CreateReportsDto } from "./dto/create-reports.dto";
 import { AuthGuard } from "../auth/guards/auth.gaurds";
 import { CurrentUser } from "../users/decorator/current-user.decorator";
-import { User } from "src/users/users.entity";
+import { User } from "../users/users.entity";
 
 @Controller("reports")
 export class ReportsController {
