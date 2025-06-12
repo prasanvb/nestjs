@@ -1,4 +1,5 @@
-import { AfterInsert, AfterUpdate, AfterRemove, Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { AfterInsert, AfterUpdate, AfterRemove, Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Report } from "../reports/reports.entity";
 
 /* 
   NOTE: Class Serializer Interceptor Approach
@@ -15,10 +16,13 @@ export class User {
 
   @Column()
   /* 
-    NOTE: Class Serializer Interceptor Approach
+    NOTE: Class Serializer Interceptor Approach not very beneficial
     @Exclude() 
   */
   password: string;
+
+  @OneToMany(() => Report, (report) => report.user)
+  reports: Report[];
 
   @AfterInsert()
   logInsert() {

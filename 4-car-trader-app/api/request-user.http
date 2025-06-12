@@ -8,7 +8,7 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "email": "prasanb@gmail.com",
+  "email": "prasan@gmail.com",
   "password": "prasan"
 }
 
@@ -17,8 +17,8 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "pvb2@gmail.com",
-  "password": "pvb"
+  "email": "prasan@gmail.com",
+  "password": "prasan"
 }
 
 ### Log out user

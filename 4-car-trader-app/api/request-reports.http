@@ -1,0 +1,19 @@
+// HTTP Request using REST client vscode extension
+// Compose MULTIPLE requests in a single file (separated by ### delimiter)
+// NOTE: Single line space below content type is mandatory
+
+### Auth Routes
+### Create new user sign up
+POST http://localhost:3000/reports
+Content-Type: application/json
+
+{
+  "price": 9500,
+  "make": "toyota",
+  "model": "corolla",
+  "year": 2010,
+  "mileage": 70000,
+  "long": 0,
+  "lat": 0
+}
+
