@@ -64,6 +64,13 @@
   - When `@UseInterceptors` is used at the individual handler level, the interceptor will apply only to that specific method.
   - `@param` a single interceptor instance or class, or a list of interceptor instances or classes.
 - `ClassSerializerInterceptor` interceptor uses the powerful class-transformer package to provide a declarative and extensible way of transforming objects. The basic operation it performs is to take the value returned by a method handler and apply the `instanceToPlain()` function from class-transformer. In doing so, it can apply rules expressed by class-transformer decorators (example: `Exclude()`) on an entity/DTO class,
+- `Transform()` to transform response object before sending it out. [sample](4-car-trader-app/src/reports/dto/view-reports.dto.ts)
+
+```typescript
+@Transform((report: { obj: { user: User } }) => {
+    return report.obj.user.id;
+  })
+```
 
 ### [Custom Interceptor approach using DTO's](4-car-trader-app/src/users/interceptor/serialize.intercept.ts)
 

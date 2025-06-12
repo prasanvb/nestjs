@@ -16,7 +16,7 @@ import { ViewUserDto } from "../users/dto/view-user.dto";
 import { Serialize } from "../users/interceptor/serialize.interceptor";
 import { CurrentUser } from "../users/decorator/current-user.decorator";
 import { User } from "../users/users.entity";
-import { AuthGuard } from "./guards/auth.gaurds";
+import { AuthGuard } from "./guards/auth.guards";
 
 @Controller("auth")
 export class authController {
@@ -26,7 +26,7 @@ export class authController {
   ) {}
 
   @Post("signup")
-  @Serialize(ViewUserDto)
+  @Serialize(ViewUserDto) // Transforms the contents of the route api response object before sending out
   async userSignUp(@Body() body: UserDto, @Session() session: CookieSessionInterfaces.CookieSessionObject) {
     const { email, password } = body;
 
@@ -47,7 +47,7 @@ export class authController {
   }
 
   @Post("login")
-  @Serialize(ViewUserDto)
+  @Serialize(ViewUserDto) // Transforms the contents of the route api response object before sending out
   async login(@Body() body: UserDto, @Session() session: CookieSessionInterfaces.CookieSessionObject) {
     const { email, password } = body;
 
