@@ -8,11 +8,11 @@ POST http://localhost:3000/reports
 Content-Type: application/json
 
 {
-  "price": 9500,
-  "make": "toyota",
-  "model": "corolla",
-  "year": 2010,
-  "mileage": 70000,
+  "price": 4500,
+  "make": "nissan",
+  "model": "micra",
+  "year": 2000,
+  "mileage": 40000,
   "long": 0,
   "lat": 0
 }

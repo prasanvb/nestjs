@@ -19,7 +19,7 @@ import { ViewUserDto } from "./dto/view-user.dto";
 import { Serialize } from "./interceptor/serialize.interceptor";
 
 @Controller("user")
-@Serialize(ViewUserDto)
+@Serialize(ViewUserDto) // Restricts the contents of the user api response object
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
