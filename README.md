@@ -84,7 +84,7 @@
   - The `ValidationPipe` is a built-in NestJS pipe used for data validation.
   - To add validation pipes at the global level to the app instance, use: `app.useGlobalPipes(new ValidationPipe()).`
 
-### Data Transfer Object ([DTO](src/messages/dto/create-message.dto.ts))
+### Data Transfer Object ([DTO](2-message-book-app/src/messages/dto/create-message.dto.ts))
 
 - A DTO is a class that defines the properties required in the request body and response object. Dto's don't hold any business logic.
 
@@ -92,7 +92,7 @@
   - Deserialization takes the serialized data (e.g., a stream of bytes or a JSON string) and reconstructs the original object or data structure.
 
 - Add validation decorators (example: `@IsString()`) to the properties of the DTO class using the `class-validator` package.
-- The [DTO class](src/messages/messages.controller.ts), along with its validation rules, is applied to the request body in the route method.
+- The [DTO class](2-message-book-app/src/messages/messages.controller.ts), along with its validation rules, is applied to the request body in the route method.
 - Under the hood, DTOs utilize [class-transformer](https://www.npmjs.com/package/class-transformer/) and [class-validator](https://www.npmjs.com/package/class-validator) for data validation:
   - `class-transformer` converts the body into an instance of the DTO class.
   - `class-validator` is used to validate that instance.
@@ -161,7 +161,7 @@
 
 - `sqlite` is a file based database
 - `npm install @nestjs/typeorm typeorm sqlite3`
-- `import` the [typeorm module](src/app.module.ts) inside the `@Module()` decorator
+- `import` the [typeorm module](4-car-trader-app/src/app.module.ts) inside the `@Module()` decorator
 - [TypeORM Entity](4-car-trader-app/screenshots/4-TypeORM-entity.png): When using TypeORM, we don't need to manually create repository files as we did in our message book app. Instead, these repositories are created automatically behind the scenes. We won't see any generated files or anything like that; we will simply have classes created for us.
 
   - Creating an Entity
@@ -209,7 +209,7 @@
   })
 ```
 
-#### [Custom Interceptor approach using DTO's](4-car-trader-app/src/users/interceptor/serialize.intercept.ts)
+#### [Custom Interceptor approach using DTO's](4-car-trader-app/src/users/interceptor/serialize.interceptor.ts)
 
 - Create a custom interceptor to handle response transformation
   - Converts the user entity to a plain object.
