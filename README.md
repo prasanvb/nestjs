@@ -19,13 +19,7 @@
 
 ## <ins>**Nestjs Projects**</ins>
 
-- [1-core](1-core/README.md)
-- [2-message-book-app](2-message-book-app/README.md)
-- [3-dependency-injection-indepth](3-dependency-injection-indepth/README.md)
-- [4-car-trader-app](4-car-trader-app/README.md)
-
-
-## 1. Core
+## [1. Core](1-core/src)
 
 ### Getting project running
 
@@ -48,7 +42,7 @@
 - Filename template: name.type_of_thing.ts - `app.modules.ts`, `app.controller.ts`
 
 
-## 2. Message book app
+## [2. Message book app](2-message-book-app/src)
 
 ### Workings 
 
@@ -98,7 +92,7 @@
   - `class-validator` is used to validate that instance.
 
 
-## 3. Dependency injection in-depth
+## [3. Dependency injection in-depth](3-dependency-injection-indepth/src)
 
 ### Workings
 
@@ -135,7 +129,7 @@
 - Once services are added exports list, other module first needs to import the module, so it can call imported service inside its classes
 - To call imported service methods inside a class, define the constructor with the newly imported service. Now imported service methods can be called inside the class methods
 
-## 4. Car trader app
+## [4. Car trader app](4-car-trader-app/src)
 
 ### Environment variables
 
