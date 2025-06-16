@@ -72,17 +72,19 @@ export class authController {
     return { sessionUserID: Session.userId as null };
   }
 
+  // NOTE: Identify currently logged in user using Session param decorator
   @Get("identify-session")
   @Serialize(ViewUserDto)
   async identifyUser(@Session() session: CookieSessionInterfaces.CookieSessionObject) {
-    const user = await this.usersService.findOne(parseInt(session.userId as string));
+    const id = parseInt(session.userId as string);
+    const user = await this.usersService.findOne(id);
     if (!user) {
       throw new NotFoundException(`No session user found`);
     }
     return user;
   }
 
-  // NOTE: custom CurrentUser decorator that uses interceptor to find the currently loged in user
+  // NOTE: Identify currently logged in user using custom CurrentUser decorator
   @Get("whoami")
   @UseGuards(AuthGuard)
   @Serialize(ViewUserDto)
@@ -90,14 +92,15 @@ export class authController {
     return user;
   }
 
-  // NOTE: Example route set encrypted session cookie
+  // NOTE: Example routes for session cookie feature
+  // Set encrypted session cookie
   @Get("/colors/:color")
   setColor(@Param("color") color: string, @Session() session) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     session.color = color;
   }
 
-  // NOTE: Example route get decrypted session data
+  // Get decrypted session data
   @Get("/colors")
   getColors(@Session() session) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
