@@ -2,18 +2,20 @@
 // Compose MULTIPLE requests in a single file (separated by ### delimiter)
 // NOTE: Single line space below content type is mandatory
 
-### Auth Routes
-### Create new user sign up
+### Reports Routes
+### Create new report
 POST http://localhost:3000/reports
 Content-Type: application/json
 
 {
-  "price": 4500,
+  "price": 14500,
   "make": "nissan",
-  "model": "micra",
-  "year": 2000,
-  "mileage": 40000,
+  "model": "rouge",
+  "year": 2016,
+  "mileage": 60000,
   "long": 0,
   "lat": 0
 }
 
+### View a report
+GET http://localhost:3000/reports/4

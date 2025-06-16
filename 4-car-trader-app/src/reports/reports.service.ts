@@ -16,4 +16,9 @@ export class ReportsService {
 
     return this.repo.save(report);
   }
+
+  findReport(id: number) {
+    const report = this.repo.findOne({ where: { id }, relations: ["user"] });
+    return report;
+  }
 }

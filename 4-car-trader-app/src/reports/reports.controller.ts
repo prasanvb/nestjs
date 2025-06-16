@@ -1,5 +1,5 @@
 import { ReportsService } from "./reports.service";
-import { Body, Controller, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, NotFoundException, Param, Post, UseGuards } from "@nestjs/common";
 import { CreateReportsDto } from "./dto/create-reports.dto";
 import { AuthGuard } from "../auth/guards/auth.guards";
 import { CurrentUser } from "../users/decorator/current-user.decorator";
@@ -16,5 +16,15 @@ export class ReportsController {
   @UseGuards(AuthGuard)
   createReports(@Body() body: CreateReportsDto, @CurrentUser() user: User) {
     return this.reportsService.create(body, user);
+  }
+
+  @Get(":id")
+  @UseGuards(AuthGuard)
+  async viewReport(@Param("id") id: string) {
+    const report = await this.reportsService.findReport(parseInt(id));
+    if (!report) {
+      throw new NotFoundException(`report with id:${id} not found`);
+    }
+    return report;
   }
 }

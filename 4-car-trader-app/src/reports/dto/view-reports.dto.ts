@@ -22,10 +22,10 @@ export class ViewReportsDto {
   @Expose()
   lat: number;
 
+  @Expose()
   @Transform((report: { obj: { user: User } }) => {
-    console.log({ report });
+    console.log("view-reports.dto", { report });
     return report.obj.user.id;
   })
-  @Expose()
   userId: number;
 }
