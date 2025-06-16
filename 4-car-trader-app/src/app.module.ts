@@ -28,9 +28,9 @@ const NewTypeOrmConfigModule = TypeOrmModule.forRootAsync({
     // Entities to be loaded for this connection. Accepts both entity classes and directories where from entities need to be loaded.
     entities: [User, Report],
     // `synchronize: true` - Indicates if database schema should be auto created on every application launch. Be careful with this option and don't use this in production - otherwise you can lose production data. This option is useful during debug and development.
-    synchronize: true,
-    // console logging for a DB queries made
-    logging: true,
+    synchronize: process.env.NODE_ENV !== 'production',
+    // console logging for DB queries made, enabled only in non-production environments for performance
+    logging: process.env.NODE_ENV !== 'production',
   }),
 });
 

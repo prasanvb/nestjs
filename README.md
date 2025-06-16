@@ -13,7 +13,7 @@
   - Interceptors - Adds additional logic to incoming request or outgoing response
   - Repositories - Handles data stored in a DB
 
-**Note:** 
+**Note:**
 
 - It is common to have similar method names in both the service and repositories.
 
@@ -41,10 +41,9 @@
 - Name of class and name of the file should always match up
 - Filename template: name.type_of_thing.ts - `app.modules.ts`, `app.controller.ts`
 
-
 ## [2. Message book app](2-message-book-app/src)
 
-### Workings 
+### Workings
 
 - **Controllers:** You do not need to register controllers with the DI container, as NestJS automatically creates instances of controllers within the module.
 - **Service:** This is where you should place any business logic. Services typically utilize one or more repositories to find or store data.
@@ -90,7 +89,6 @@
 - Under the hood, DTOs utilize [class-transformer](https://www.npmjs.com/package/class-transformer/) and [class-validator](https://www.npmjs.com/package/class-validator) for data validation:
   - `class-transformer` converts the body into an instance of the DTO class.
   - `class-validator` is used to validate that instance.
-
 
 ## [3. Dependency injection in-depth](3-dependency-injection-indepth/src)
 
@@ -259,5 +257,3 @@ export class AuthGuard implements CanActivate {
   }
 }
 ```
-
-
