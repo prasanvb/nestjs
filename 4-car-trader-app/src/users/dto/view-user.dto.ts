@@ -7,6 +7,9 @@ export class ViewUserDto {
   @Expose()
   email: string;
 
+  @Expose()
+  admin: boolean;
+
   @Exclude()
   password: string;
 }

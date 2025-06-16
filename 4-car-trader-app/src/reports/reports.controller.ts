@@ -1,7 +1,7 @@
 import { ReportsService } from "./reports.service";
 import { Body, Controller, Get, NotFoundException, Param, Patch, Post, UseGuards } from "@nestjs/common";
 import { CreateReportsDto } from "./dto/create-reports.dto";
-import { AuthGuard } from "../auth/guards/auth.guards";
+import { AuthGuard, AdminGuard } from "../guards/index";
 import { CurrentUser } from "../users/decorator/current-user.decorator";
 import { User } from "../users/users.entity";
 import { Serialize } from "../users/interceptor/serialize.interceptor";
@@ -21,6 +21,7 @@ export class ReportsController {
 
   @Get(":id")
   @UseGuards(AuthGuard)
+  @UseGuards(AdminGuard)
   async viewReport(@Param("id") id: string) {
     const report = await this.reportsService.findReport(parseInt(id));
     if (!report) {
@@ -31,6 +32,7 @@ export class ReportsController {
 
   @Patch(":id")
   @UseGuards(AuthGuard)
+  @UseGuards(AdminGuard)
   async approveReport(@Param("id") id: string, @Body() body: ApproveReportDto) {
     const { approved } = body;
     const report = await this.reportsService.changeApproval(parseInt(id), approved);

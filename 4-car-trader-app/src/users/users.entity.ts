@@ -14,11 +14,14 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ default: false })
+  admin: boolean;
+
   /* 
-    NOTE: Class Serializer Interceptor Approach not very beneficial
-    @Exclude() 
+    NOTE: Class Serializer Interceptor Approach
+    Adding @Exclude() directly in the entity file is not very beneficial 
   */
+  @Column()
   password: string;
 
   @OneToMany(() => Report, (report) => report.user)
