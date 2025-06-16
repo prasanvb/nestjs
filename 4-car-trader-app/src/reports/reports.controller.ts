@@ -1,11 +1,12 @@
 import { ReportsService } from "./reports.service";
-import { Body, Controller, Get, NotFoundException, Param, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, NotFoundException, Param, Patch, Post, UseGuards } from "@nestjs/common";
 import { CreateReportsDto } from "./dto/create-reports.dto";
 import { AuthGuard } from "../auth/guards/auth.guards";
 import { CurrentUser } from "../users/decorator/current-user.decorator";
 import { User } from "../users/users.entity";
 import { Serialize } from "../users/interceptor/serialize.interceptor";
 import { ViewReportsDto } from "./dto/view-reports.dto";
+import { ApproveReportDto } from "./dto/approve-reports.dto";
 
 @Serialize(ViewReportsDto) // Transforms the contents of all routes in the reports api response object before sending out
 @Controller("reports")
@@ -25,6 +26,15 @@ export class ReportsController {
     if (!report) {
       throw new NotFoundException(`report with id:${id} not found`);
     }
+    return report;
+  }
+
+  @Patch(":id")
+  @UseGuards(AuthGuard)
+  async approveReport(@Param("id") id: string, @Body() body: ApproveReportDto) {
+    const { approved } = body;
+    const report = await this.reportsService.changeApproval(parseInt(id), approved);
+
     return report;
   }
 }

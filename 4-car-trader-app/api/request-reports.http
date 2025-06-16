@@ -8,14 +8,23 @@ POST http://localhost:3000/reports
 Content-Type: application/json
 
 {
-  "price": 14500,
-  "make": "nissan",
-  "model": "rouge",
-  "year": 2016,
-  "mileage": 60000,
+  "price": 15000,
+  "make": "honda",
+  "model": "crv",
+  "year": 2019,
+  "mileage": 50000,
   "long": 0,
   "lat": 0
 }
 
 ### View a report
-GET http://localhost:3000/reports/4
+GET http://localhost:3000/reports/5
+
+
+### Patch approval of a new report
+PATCH http://localhost:3000/reports/5
+Content-Type: application/json
+
+{
+  "approved": false
+}

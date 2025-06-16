@@ -2,6 +2,13 @@ import { Expose, Exclude, Transform } from "class-transformer";
 import { User } from "src/users/users.entity";
 
 export class ViewReportsDto {
+  @Expose()
+  id: number;
+
+  @Expose()
+  approved: boolean;
+
+  @Expose()
   price: number;
 
   @Expose()
