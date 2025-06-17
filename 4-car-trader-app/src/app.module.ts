@@ -1,3 +1,4 @@
+import { ValidationPipe } from "@nestjs/common";
 import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { APP_PIPE } from "@nestjs/core";
 import { TypeOrmModule } from "@nestjs/typeorm";
@@ -8,7 +9,7 @@ import { ReportsModule } from "./reports/reports.module";
 import { User } from "./users/users.entity";
 import { Report } from "./reports/reports.entity";
 import { AuthModule } from "./auth/auth.module";
-import { cookieSessionSetup, pipeSetUp } from "./middlewares";
+import { cookieSessionMiddleware } from "./middleware/cookieSessionMiddleware";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { RequestHandler } from "express";
 
@@ -28,10 +29,16 @@ const NewTypeOrmConfigModule = TypeOrmModule.forRootAsync({
     // Entities to be loaded for this connection. Accepts both entity classes and directories where from entities need to be loaded.
     entities: [User, Report],
     // `synchronize: true` - Indicates if database schema should be auto created on every application launch. Be careful with this option and don't use this in production - otherwise you can lose production data. This option is useful during debug and development.
-    synchronize: process.env.NODE_ENV !== 'production',
+    synchronize: process.env.NODE_ENV !== "production",
     // console logging for DB queries made, enabled only in non-production environments for performance
-    logging: process.env.NODE_ENV !== 'production',
+    logging: process.env.NODE_ENV !== "production",
   }),
+});
+
+//
+export const inputBodyValidatorPipe = new ValidationPipe({
+  // validator strips in-valid properties from the incoming body object that do not match decorators in the DTOs
+  whitelist: true,
 });
 
 @Module({
@@ -41,12 +48,12 @@ const NewTypeOrmConfigModule = TypeOrmModule.forRootAsync({
     AppService,
     {
       provide: APP_PIPE,
-      useValue: pipeSetUp,
+      useValue: inputBodyValidatorPipe,
     },
   ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(cookieSessionSetup as RequestHandler).forRoutes("*");
+    consumer.apply(cookieSessionMiddleware as RequestHandler).forRoutes("*");
   }
 }
