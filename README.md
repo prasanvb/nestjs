@@ -261,3 +261,4 @@ export class AuthGuard implements CanActivate {
 ### [Convert Interceptor to Middleware](4-car-trader-app/screenshots/5-convert-interceptor-to-middleware.png)
 
 - CurrentUser interceptor is converted to CurrentUser global middleware
+  - Interceptors are executed after guards. If we use an interceptor within a guard, the logic will fail. Therefore, the CurrentUser Interceptor has been converted into CurrentUser Middleware.

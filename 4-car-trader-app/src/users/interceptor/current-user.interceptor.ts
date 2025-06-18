@@ -2,6 +2,7 @@ import { NestInterceptor, ExecutionContext, CallHandler, Injectable } from "@nes
 import { UsersService } from "../users.service";
 import { CurrentRequestType } from "../../global.interface";
 
+// NOTE: Interceptor code not in use, logic moved to CurrentUserMiddleware
 @Injectable()
 export class CurrentUserInterceptor implements NestInterceptor {
   constructor(private usersService: UsersService) {}

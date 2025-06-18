@@ -54,6 +54,7 @@ export const inputBodyValidatorPipe = new ValidationPipe({
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
+    // Middleware is applied to all the routes in the application
     consumer.apply(cookieSessionMiddleware as RequestHandler).forRoutes("*");
   }
 }

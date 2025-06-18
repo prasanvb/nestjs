@@ -1,7 +1,7 @@
+import { Request } from "express";
 import { User } from "./users/users.entity";
-import { RequestHandler } from "@nestjs/common/interfaces";
 
-export interface CurrentRequestType extends RequestHandler {
+export interface CurrentRequestType extends Request {
   currentUser?: User | null;
   session?: {
     userId: string;

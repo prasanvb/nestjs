@@ -21,7 +21,6 @@ export class ReportsController {
 
   @Get(":id")
   @UseGuards(AuthGuard)
-  @UseGuards(AdminGuard)
   async viewReport(@Param("id") id: string) {
     const report = await this.reportsService.findReport(parseInt(id));
     if (!report) {
