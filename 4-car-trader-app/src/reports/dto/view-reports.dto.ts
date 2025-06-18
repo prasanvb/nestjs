@@ -1,4 +1,4 @@
-import { Expose, Exclude, Transform } from "class-transformer";
+import { Expose, Transform } from "class-transformer";
 import { User } from "src/users/users.entity";
 
 export class ViewReportsDto {
@@ -31,7 +31,7 @@ export class ViewReportsDto {
 
   @Expose()
   @Transform((report: { obj: { user: User } }) => {
-    console.log("view-reports.dto", { report });
+    // console.log("view-reports.dto", { report });
     return report.obj.user.id;
   })
   userId: number;

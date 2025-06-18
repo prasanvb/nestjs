@@ -28,3 +28,7 @@ Content-Type: application/json
 {
   "approved": true
 }
+
+### Get estimates
+GET http://localhost:3000/reports?make=honda&model=crv&year=2019&mileage=50000&long=0&lat=0
+

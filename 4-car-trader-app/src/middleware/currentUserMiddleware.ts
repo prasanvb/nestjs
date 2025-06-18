@@ -1,7 +1,13 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { Request, Response, NextFunction } from "express";
 import { UsersService } from "../users/users.service";
-import { CurrentRequestType } from "src/global.interface";
+import { User } from "src/users/users.entity";
+
+declare module "express-serve-static-core" {
+  interface Request {
+    currentUser?: User | null;
+  }
+}
 
 // NOTE: CurrentUserInterceptor converted to CurrentUserMiddleware.
 @Injectable()
@@ -16,7 +22,7 @@ export class CurrentUserMiddleware implements NestMiddleware {
 
       // Adding new user object to the request object
       if (user) {
-        (req as CurrentRequestType).currentUser = user;
+        req.currentUser = user;
       }
     }
 
