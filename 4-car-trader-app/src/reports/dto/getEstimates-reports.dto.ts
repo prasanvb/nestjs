@@ -20,11 +20,11 @@ export class GetEstimatesDto {
   @Max(1000000)
   mileage: number;
 
-  @Transform((report: { value: string }) => parseInt(report.value))
+  @Transform((report: { value: string }) => parseFloat(report.value))
   @IsLongitude()
   long: number;
 
-  @Transform((report: { value: string }) => parseInt(report.value))
+  @Transform((report: { value: string }) => parseFloat(report.value))
   @IsLatitude()
   lat: number;
 }
