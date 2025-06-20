@@ -19,14 +19,15 @@ import { User } from "../users/users.entity";
 import { AuthGuard } from "../guards/index";
 
 @Controller("auth")
-export class authController {
+export class AuthController {
   constructor(
     private authService: AuthService,
     private usersService: UsersService
   ) {}
 
+  // Handles user signup by validating email uniqueness and creating a session.
   @Post("signup")
-  @Serialize(ViewUserDto) // Transforms the contents of the route api response object before sending out
+  @Serialize(ViewUserDto) // Transforms the contents of the route API response object before sending out
   async userSignUp(@Body() body: UserDto, @Session() session: CookieSessionInterfaces.CookieSessionObject) {
     const { email, password } = body;
 
@@ -34,7 +35,7 @@ export class authController {
     const userList = await this.usersService.findByEmail(email);
 
     if (userList.length) {
-      throw new BadRequestException("Email already exits");
+      throw new BadRequestException("Email already exists");
     }
 
     // Create a new user and return it
@@ -46,8 +47,9 @@ export class authController {
     return user;
   }
 
+  // Handles user login by validating credentials and creating a session.
   @Post("login")
-  @Serialize(ViewUserDto) // Transforms the contents of the route api response object before sending out
+  @Serialize(ViewUserDto) // Transforms the contents of the route API response object before sending out
   async login(@Body() body: UserDto, @Session() session: CookieSessionInterfaces.CookieSessionObject) {
     const { email, password } = body;
 
@@ -55,7 +57,7 @@ export class authController {
     const [user] = await this.usersService.findByEmail(email);
 
     if (!user) {
-      throw new BadRequestException("Email does not exits");
+      throw new BadRequestException("Email does not exist");
     }
 
     const authenticatedUser = await this.authService.authenticateUser(user, password);
@@ -66,13 +68,14 @@ export class authController {
     return authenticatedUser;
   }
 
+  // Logs out the user by clearing the session user ID.
   @Post("/logout")
   logout(@Session() Session: CookieSessionInterfaces.CookieSessionObject) {
     Session.userId = null;
     return { sessionUserID: Session.userId as null };
   }
 
-  // NOTE: Identify currently logged in user using Session param decorator
+  // Identifies the logged-in user using session data.
   @Get("identify-session")
   @Serialize(ViewUserDto)
   async identifyUser(@Session() session: CookieSessionInterfaces.CookieSessionObject) {
@@ -84,7 +87,7 @@ export class authController {
     return user;
   }
 
-  // NOTE: Identify currently logged in user using custom CurrentUser decorator
+  // Identifies the logged-in user using a custom decorator.
   @Get("whoami")
   @UseGuards(AuthGuard)
   @Serialize(ViewUserDto)
@@ -92,18 +95,15 @@ export class authController {
     return user;
   }
 
-  // NOTE: Example routes for session cookie feature
-  // Set encrypted session cookie
+  // Sets a color preference in the session cookie.
   @Get("/colors/:color")
-  setColor(@Param("color") color: string, @Session() session) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  setColor(@Param("color") color: string, @Session() session: CookieSessionInterfaces.CookieSessionObject) {
     session.color = color;
   }
 
-  // Get decrypted session data
+  // Retrieves the color preference from the session cookie.
   @Get("/colors")
-  getColors(@Session() session) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  getColors(@Session() session: CookieSessionInterfaces.CookieSessionObject) {
     return { color: session.color as string };
   }
 }

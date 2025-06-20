@@ -10,34 +10,32 @@ const scrypt = promisify(_scrypt);
 export class AuthService {
   constructor(private usersService: UsersService) {}
 
+  // Creates a new user with a hashed password.
   async createNewUser(email: string, password: string) {
-    // Hashing new user password
-    // Generate a salt
+    // Generate a salt for password hashing
     const salt: string = randomBytes(8).toString("hex");
 
-    // Hash the salt and the password together
-    const hashBuffer = (await scrypt(password, salt, 32)) as Buffer<ArrayBufferLike>;
+    // Hash the password with the salt
+    const hashBuffer = (await scrypt(password, salt, 32)) as Buffer;
     const hash: string = hashBuffer.toString("hex");
 
-    // Join the hashed result and the salt together
-    const hashedPassword = salt + "." + hash;
+    // Combine salt and hash for storage
+    const hashedPassword = `${salt}.${hash}`;
 
-    // Create new user and save it
+    // Create and save the new user
     const newlyCreatedUser = await this.usersService.create(email, hashedPassword);
-
-    // return newly created user
     return newlyCreatedUser;
   }
 
+  // Authenticates a user by comparing hashed passwords.
   async authenticateUser(user: User, password: string) {
-    // Comparing hashed passwords to authenticate user
-    const [salt, hashedPassword] = user.password.split(".");
+    const [salt, storedHash] = user.password.split(".");
 
-    // Hash the salt and the password together
-    const hashBuffer = (await scrypt(password, salt, 32)) as Buffer<ArrayBufferLike>;
+    // Hash the provided password with the stored salt
+    const hashBuffer = (await scrypt(password, salt, 32)) as Buffer;
     const hash: string = hashBuffer.toString("hex");
 
-    if (hashedPassword !== hash) {
+    if (storedHash !== hash) {
       throw new BadRequestException("User authentication failed");
     }
 
