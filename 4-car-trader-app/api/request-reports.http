@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ### View a report
-GET http://localhost:3000/reports/7
+GET http://localhost:3000/reports/9
 
 
 ### Patch approval of a new report
@@ -29,6 +29,10 @@ Content-Type: application/json
   "approved": true
 }
 
+### Get all reports
+GET http://localhost:3000/reports/all
+
 ### Get estimates
-GET http://localhost:3000/reports?make=honda&model=crv&year=2019&mileage=50000&long=0&lat=0
+GET http://localhost:3000/reports?make=ford&model=mustang&year=2018&mileage=50000&long=0&lat=0
+
 
