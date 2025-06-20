@@ -32,7 +32,7 @@ export class ViewReportsDto {
   @Expose()
   @Transform((report: { obj: { user: User } }) => {
     // console.log("view-reports.dto", { report });
-    return report.obj.user.id;
+    return report.obj.user?.id ?? null;
   })
   userId: number;
 }

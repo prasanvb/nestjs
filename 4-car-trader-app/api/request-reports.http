@@ -9,20 +9,20 @@ Content-Type: application/json
 
 {
   "price": 15000,
-  "make": "honda",
-  "model": "crv",
-  "year": 2019,
+  "make": "ford",
+  "model": "mustang",
+  "year": 2018,
   "mileage": 50000,
   "long": 0,
   "lat": 0
 }
 
 ### View a report
-GET http://localhost:3000/reports/5
+GET http://localhost:3000/reports/7
 
 
 ### Patch approval of a new report
-PATCH http://localhost:3000/reports/5
+PATCH http://localhost:3000/reports/7
 Content-Type: application/json
 
 {
