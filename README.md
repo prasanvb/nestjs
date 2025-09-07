@@ -92,6 +92,8 @@
 
 ## [3. Dependency injection in-depth](3-dependency-injection-indepth/src)
 
+[Custom Dependency Injection Example](1-core/customDependencyInjection.ts)
+
 ### Workings
 
 - `nest generate module computer` - generates a module with name computer
